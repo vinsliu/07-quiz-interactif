@@ -46,13 +46,7 @@ function App() {
           setSelectedCategory={setSelectedCategory}
           categories={categories}
         />
-        {filteredData.map((item) => (
-          <QuizAccordion
-            key={item.id}
-            question={item.question}
-            answer={item.answer}
-          />
-        ))}
+        <QuizAccordion data={filteredData} />
       </Container>
     </>
   );

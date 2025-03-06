@@ -1,15 +1,17 @@
 import { Accordion } from "react-bootstrap";
 import QuestionItem from "./QuestionItem";
 
-function QuizAccordion({ question }) {
+function QuizAccordion({ data }) {
   return (
     <Accordion defaultActiveKey="0">
-      <Accordion.Item eventKey="0">
-        <Accordion.Header> {question} </Accordion.Header>
-        <Accordion.Body>
-          <QuestionItem />
-        </Accordion.Body>
-      </Accordion.Item>
+      {data.map((item, index) => (
+        <Accordion.Item eventKey={index.toString()} key={item.id}>
+          <Accordion.Header> {item.question} </Accordion.Header>
+          <Accordion.Body>
+            <QuestionItem answer={item.answer} />
+          </Accordion.Body>
+        </Accordion.Item>
+      ))}
     </Accordion>
   );
 }
