@@ -1,13 +1,20 @@
 import { Dropdown } from "react-bootstrap";
 
-function FilterQuiz() {
-  
+function FilterQuiz({ setSelectedCategory, categories }) {
+  const handleSelected = (category) => {
+    setSelectedCategory(category);
+  };
+
   return (
-    <Dropdown>
-      <Dropdown.Toggle>Filtre</Dropdown.Toggle>
+    <Dropdown onSelect={handleSelected}>
+      <Dropdown.Toggle variant="primary">Filtre</Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item>One</Dropdown.Item>
+        {categories.map((category) => (
+          <Dropdown.Item key={category} eventKey={category}>
+            {category}
+          </Dropdown.Item>
+        ))}
       </Dropdown.Menu>
     </Dropdown>
   );

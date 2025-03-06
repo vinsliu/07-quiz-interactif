@@ -2,6 +2,7 @@ import { Container } from "react-bootstrap";
 import "./App.scss";
 import QuizAccordion from "./components/QuizAccordion";
 import FilterQuiz from "./components/FilterQuiz";
+import { useState } from "react";
 
 function App() {
   const data = [
@@ -28,15 +29,29 @@ function App() {
     },
   ];
 
-  const filteredData = data.filter((item) => item.category);
+  const [selectedCategory, setSelectedCategory] = useState("Toutes");
+
+  const categories = ["Toutes", ...new Set(data.map((item) => item.category))];
+
+  const filteredData =
+    selectedCategory === "Toutes"
+      ? data
+      : data.filter((item) => item.category === selectedCategory);
 
   return (
     <>
       <Container>
         <h1>Quiz Intéractif</h1>
-        <FilterQuiz />
+        <FilterQuiz
+          setSelectedCategory={setSelectedCategory}
+          categories={categories}
+        />
         {filteredData.map((item) => (
-          <QuizAccordion key={item.id} question={item.question} answer={item.answer} />
+          <QuizAccordion
+            key={item.id}
+            question={item.question}
+            answer={item.answer}
+          />
         ))}
       </Container>
     </>
